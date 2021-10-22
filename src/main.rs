@@ -27,3 +27,5 @@ fn main() {
         println!("你猜的数是：{}", guess);
     }
 }
+
+const MAX_POINT: u32 = 1000;
