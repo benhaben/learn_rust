@@ -11,7 +11,7 @@ fn main() {
     let mut guess = String::new();
     io::stdin().read_line(&mut guess).expect("无法读取行");
     //shadow
-    let guess = guess.trim().parse::<u32>().expect("please type a number");
+    let guess:u32 = guess.trim().parse::<u32>().expect("please type a number");
 
     match guess.cmp(&secret_number) {
         Ordering::Less =>  println!("too small"), //arm
