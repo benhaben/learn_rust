@@ -26,6 +26,13 @@ fn main() {
         }
         println!("你猜的数是：{}", guess);
     }
+
+    //shadowing
+    let x=5;
+    let x= x+1;
+    let x:u32 = x; //类型可以变
+    println!("x：{}", x);
+
 }
 
 const MAX_POINT: u32 = 1000;
