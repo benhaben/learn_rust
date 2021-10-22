@@ -71,7 +71,17 @@ fn main() {
     another_function(7);
     //paramters 形参，类型必须指定; arguments 实参
 
-    //
+    //函数体中语句和表达式
+    // 语句是执行指令，代码，没有返回值
+    // 表达式是有计算结果，比如 5+6
+    let x = {
+        x[1]+1
+    };
+
+    // error：语句没有返回值
+    // let x = {
+    //     x+1;
+    // };
 }
 
 fn another_function(x:i32){
