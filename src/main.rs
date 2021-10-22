@@ -62,8 +62,20 @@ fn main() {
     // 数组，栈上。vector由标准库提供，比数组灵活
     let x = [3; 5]; // [3,3,3,3,3]
     //越界，编译时候不会报错(简单的情况除外)，运行时候会panic，和c不一样
-    let x = x[1000];
-    println!("x：{}", x);
+    // let x = x[1000];
+    println!("x：{}", x[1]);
+
+    //函数
+    //函数申明使用fn，使用snake case
+    //单词之间用下划线
+    another_function(7);
+    //paramters 形参，类型必须指定; arguments 实参
+
+    //
+}
+
+fn another_function(x:i32){
+    println!("another_function")
 }
 
 const MAX_POINT: u32 = 1000;
