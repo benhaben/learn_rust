@@ -61,8 +61,8 @@ fn main() {
 
     // 数组，栈上。vector由标准库提供，比数组灵活
     let x = [3; 5]; // [3,3,3,3,3]
-    //越界，编译时候不会报错(简单的情况除外)，运行时候会panic，和c不一样
-    // let x = x[1000];
+                    //越界，编译时候不会报错(简单的情况除外)，运行时候会panic，和c不一样
+                    // let x = x[1000];
     println!("x：{}", x[1]);
 
     //函数
@@ -74,17 +74,22 @@ fn main() {
     //函数体中语句和表达式
     // 语句是执行指令，代码，没有返回值
     // 表达式是有计算结果，比如 5+6
-    let x = {
-        x[1]+1
-    };
+    let x = { x[1] + 1 };
 
     // error：语句没有返回值
     // let x = {
     //     x+1;
     // };
+
+    //函数返回值
+    let x = five();
 }
 
-fn another_function(x:i32){
+fn five() -> i32 {
+    5
+}
+
+fn another_function(x: i32) {
     println!("another_function")
 }
 
