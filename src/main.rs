@@ -170,10 +170,11 @@ fn main() {
     //不可以同时拥有一个可变引用和不可变引用
     {
         let mut s = String::from("he");
-        {//但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
+        {
+            //但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
             let s1 = &mut s;
         }
-            let s2 = &mut s;
+        let s2 = &mut s;
         // let s2 = &mut s; //ERROR: second mutable borrow occurs here
         // println!("{}", s1); // ok
 
@@ -182,18 +183,80 @@ fn main() {
     }
     // 空指针错误，悬空引用
     // rust编译器可以保证引用永远不是悬空的
-    let r = dangle();
+    // let r = dangle();
 
     // 引用规则
     // 在任意给定时刻，只能满足下列条件之一：1. 一个可变的引用 2. 任意数量不可变的引用
     // 引用必须一直有效
+
+    // 切片
+    // 解决的问题：
+    {
+        let mut s = String::from("hhhe xxx");
+        let world_index = first_world(&s);
+        // 如果此时s.clear, 下面wordIndex就没用了，所以可能导致bug，rust对这种代码使用切片
+        println!("{}", world_index);
+    }
+    // 切边定义: 指向字符串中一部分的引用
+    // [开始索引..结束索引]
+    {
+        let mut s = String::from("hello world");
+        let h = &s[..5];
+        let w = &s[6..];
+        let all = &[..];
+        let world_index = first_world1(&s);
+        //s.clear(); //error: mutable borrow occurs here
+        println!("{}", world_index);
+    }
+
+    // 字符串字面值就是切片
+    // 将字符串切片作为参数传递
+    // 有经验的rust程序员会这样写 fn first_world(s:&str)->&str
+    // 这样就可以直接被字符串字面值当参数，字符串类型也可以，会使api更通用
+    {
+        let mut s = String::from("hello world");
+        let world_index = first_world2(&s[..]);
+        let world_index = first_world2("hello world");
+        //s.clear(); //error: mutable borrow occurs here
+        println!("{}", world_index);
+    }
+}
+
+fn first_world(s: &String) -> usize {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+    s.len()
+}
+
+fn first_world1(s: &String) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
+}
+
+fn first_world2(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[..i];
+        }
+    }
+    &s[..]
 }
 
 // 编译不过
-fn dangle()-> &String{
-    let s = String::from("xx");
-    &s
-}
+// fn dangle()-> &String{
+//     let s = String::from("xx");
+//     &s
+// }
 
 fn cal_len(s: String) -> (String, usize) {
     let len = s.len();
