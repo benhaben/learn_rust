@@ -99,22 +99,22 @@ fn main() {
     // 循环
     loop {
         println!("gan!");
-        break number * 2;
+        break;
     }
 
-    while number!=0 {
+    while number != 0 {
         println!("gan!");
-        break number * 2;
+        break;
     }
 
-    let a = [1,2,3,4,5]
+    let a = [1, 2, 3, 4, 5];
     for ele in a.iter() {
-        println!(ele);//ele是引用
+        println!("{}", ele); //ele是引用
     }
 
     //range,rev
     for n in (1..4).rev() {
-        println!(n);//不包含4
+        println!("{}", n); //不包含4
     }
 
     //所有权，管理计算机内存的方式
@@ -132,14 +132,71 @@ fn main() {
         let mut s = String::from("hello");
         s.push_str("world!");
         let s2 = s; // 指针，长度，容量复制 move
-        println!("{}" s);// 不能再使用s了，rust为了避免二次释放指针指向的数据
-    }//离开作用域会调用drop
+                    //println!("{}" s);// 不能再使用s了，rust为了避免二次释放指针指向的数据
+    } //离开作用域会调用drop
 
     // 你也许会将复制指针，长度，容量视为浅拷贝，但由于rust让s1失效了，所以我们用一个新的术语：移动（Move）
     // rust不会自动深copy，深拷贝可以使用clone，clone比较消耗资源，会复制堆上的数据
     // 标量有copy trait: bool,u32,char,f64,tuple里面都是copy的
 
+    // 所有权和函数，所有权和返回值，一个变量的所有权总是遵循相同的模式
+    // 把一个值付给其他值就会移动
+    // 当一个包含heap数据的变量离开作用域时，他的值就会被drap函数清理，除非数据的所有权移动到另一个变量上了
 
+    {
+        // 变量传给函数后怎么再拿到所有权呢
+        let s1 = String::from("he");
+        let (s2, len) = cal_len(s1);
+        //println!("{}",s1); s1已经被move了
+        println!("{}", s2); // ok
+    }
+
+    // 上面这种办法比较笨，介绍引用，解引用*，指向指针的指针。
+    // 把引用作为函数变量叫借用，借用的变量不可以改变，需要加mut
+    {
+        let s1 = String::from("he");
+        cal_len1(&s1);
+        println!("{}", s1); // ok
+    }
+
+    //可变引用
+    //限制：在特定作用域内，对某一块数据，只能由一个可变引用，这样做的好处是可以防止数据竞争
+    //以下三种行为会发生数据竞争：
+    // - 两个或者多个指针同时访问同一个数据
+    // - 至少有一个指针用于写入数据
+    // - 没有使用任何机制来同步对数据的访问
+    // rust在编译的时候就防止了这三种情况
+    // 但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
+    //不可以同时拥有一个可变引用和不可变引用
+    {
+        let mut s = String::from("he");
+        {//但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
+            let s1 = &mut s;
+        }
+            let s2 = &mut s;
+        // let s2 = &mut s; //ERROR: second mutable borrow occurs here
+        // println!("{}", s1); // ok
+
+        cal_len2(&mut s);
+        println!("{}", s); // ok
+    }
+    // 空指针错误，悬空引用
+    // rust编译器可以保证引用永远不是悬空的
+}
+
+fn cal_len(s: String) -> (String, usize) {
+    let len = s.len();
+    (s, len)
+}
+
+fn cal_len1(s: &String) -> usize {
+    let len = s.len();
+    return len;
+}
+
+fn cal_len2(s: &mut String) -> usize {
+    let len = s.len();
+    return len;
 }
 
 fn five() -> i32 {
