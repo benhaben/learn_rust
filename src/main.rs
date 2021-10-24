@@ -68,7 +68,7 @@ fn main() {
     //函数
     //函数申明使用fn，使用snake case
     //单词之间用下划线
-    another_function(7);
+    another_function(7);//arguments
     //paramters 形参，类型必须指定; arguments 实参
 
     //函数体中语句和表达式
@@ -76,9 +76,9 @@ fn main() {
     // 表达式是有计算结果，比如 5+6
     let x = { x[1] + 1 };
 
-    // error：语句没有返回值
+   
     // let x = {
-    //     x+1;
+    //     x+1;  // error：语句没有返回值
     // };
 
     //函数返回值
@@ -89,7 +89,7 @@ fn five() -> i32 {
     5
 }
 
-fn another_function(x: i32) {
+fn another_function(x: i32) {//paramters
     println!("another_function")
 }
 
