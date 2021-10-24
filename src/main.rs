@@ -92,6 +92,9 @@ fn main() {
     if number > 5 {
         println!("condition was true")
     }
+    //如果多个if else，可以用match重构
+    //if是个表达式，可以放在=右边
+    let number = if true { 5 } else { 6 };
 }
 
 fn five() -> i32 {
