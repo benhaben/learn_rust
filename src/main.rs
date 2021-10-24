@@ -182,6 +182,13 @@ fn main() {
     }
     // 空指针错误，悬空引用
     // rust编译器可以保证引用永远不是悬空的
+    let r = dangle();
+}
+
+// 编译不过
+fn dangle()-> &String{
+    let s = String::from("xx");
+    &s
 }
 
 fn cal_len(s: String) -> (String, usize) {
