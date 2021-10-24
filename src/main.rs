@@ -68,15 +68,14 @@ fn main() {
     //函数
     //函数申明使用fn，使用snake case
     //单词之间用下划线
-    another_function(7);//arguments
-    //paramters 形参，类型必须指定; arguments 实参
+    another_function(7); //arguments
+                         //paramters 形参，类型必须指定; arguments 实参
 
     //函数体中语句和表达式
     // 语句是执行指令，代码，没有返回值
     // 表达式是有计算结果，比如 5+6
     let x = { x[1] + 1 };
 
-   
     // let x = {
     //     x+1;  // error：语句没有返回值
     // };
@@ -87,13 +86,20 @@ fn main() {
     //注释
     /*注释 */
     //文档注释，以后再讲
+
+    //分支
+    let number = 3;
+    if number > 5 {
+        println!("condition was true")
+    }
 }
 
 fn five() -> i32 {
     5
 }
 
-fn another_function(x: i32) {//paramters
+fn another_function(x: i32) {
+    //paramters
     println!("another_function")
 }
 
