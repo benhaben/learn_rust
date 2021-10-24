@@ -101,6 +101,11 @@ fn main() {
         println!("gan!");
         break number * 2;
     }
+
+    while number!=0 {
+        println!("gan!");
+        break number * 2;
+    }
 }
 
 fn five() -> i32 {
