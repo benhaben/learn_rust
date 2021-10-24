@@ -95,6 +95,12 @@ fn main() {
     //如果多个if else，可以用match重构
     //if是个表达式，可以放在=右边
     let number = if true { 5 } else { 6 };
+
+    // 循环
+    loop {
+        println!("gan!");
+        break number * 2;
+    }
 }
 
 fn five() -> i32 {
