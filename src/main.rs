@@ -335,10 +335,10 @@ struct Rectangle {
     width: u32,
     length: u32,
 }
-fn debug_print(){
-    let rect = Rectangle{
-        width:33,
-        length:22,
+fn debug_print() {
+    let rect = Rectangle {
+        width: 33,
+        length: 22,
     };
     println!("{:#?}", rect);
 }
@@ -348,16 +348,28 @@ fn debug_print(){
 // - 方法是在struct(或enum、trait对象)的上下文中定义
 // - 第一个参数是self，表示方法被调用的struct实例
 
-impl Rectangle { //impl
-    fn area(&self)->u32{
+impl Rectangle {
+    //impl 块可以有多个
+    fn area(&self) -> u32 {
         self.width * self.length
+    }
+
+    // struct关联函数，就是类方法，比如String::from
+    // 不把self作为第一个参数
+    // 关联函数通常用于构造器
+    // :: 关联函数，模块创建的命令空间
+    fn square(size: u32) -> Rectangle {
+        Rectangle {
+            width: size,
+            length: size,
+        }
     }
 }
 
-fn call(){
-    let rect = Rectangle{
-        width:33,
-        length:22,
+fn call() {
+    let rect = Rectangle {
+        width: 33,
+        length: 22,
     };
     println!("{}", rect.area()); //调用
 }
