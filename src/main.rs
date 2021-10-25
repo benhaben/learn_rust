@@ -329,16 +329,35 @@ struct UserRef {
     // username: &str, //error 没有指定生命周期
 }
 
+//Rectangele 派生于debug
 #[derive(Debug)]
-struct Rectangele {
+struct Rectangle {
     width: u32,
     length: u32,
 }
 fn debug_print(){
-    let rect = Rectangele{
+    let rect = Rectangle{
         width:33,
         length:22,
     };
     println!("{:#?}", rect);
 }
 
+// struct的方法
+// 方法与函数的不同：
+// - 方法是在struct(或enum、trait对象)的上下文中定义
+// - 第一个参数是self，表示方法被调用的struct实例
+
+impl Rectangle { //impl
+    fn area(&self)->u32{
+        self.width * self.length
+    }
+}
+
+fn call(){
+    let rect = Rectangle{
+        width:33,
+        length:22,
+    };
+    println!("{}", rect.area()); //调用
+}
