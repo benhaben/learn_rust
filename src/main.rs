@@ -421,3 +421,6 @@ fn option() {
     // 比如string a = null;
     // string b = a+"123"
 }
+
+//rust move borrow copy
+//https://zhuanlan.zhihu.com/p/367308052 
