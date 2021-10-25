@@ -14,7 +14,7 @@ fn main() {
         //shadow
         let guess: u32 = match guess.trim().parse::<u32>() {
             Ok(num) => num,
-            Err(_) => continue,
+            Err(_) => continue, // TODO: 错误是程序退出还是怎么地
         };
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("too small"), //arm
@@ -132,7 +132,7 @@ fn main() {
         let mut s = String::from("hello");
         s.push_str("world!");
         let s2 = s; // 指针，长度，容量复制 move
-                    //println!("{}" s);// 不能再使用s了，rust为了避免二次释放指针指向的数据
+                    //println!("{}", s);// 不能再使用s了，rust为了避免二次释放指针指向的数据
     } //离开作用域会调用drop
 
     // 你也许会将复制指针，长度，容量视为浅拷贝，但由于rust让s1失效了，所以我们用一个新的术语：移动（Move）
@@ -141,7 +141,7 @@ fn main() {
 
     // 所有权和函数，所有权和返回值，一个变量的所有权总是遵循相同的模式
     // 把一个值付给其他值就会移动
-    // 当一个包含heap数据的变量离开作用域时，他的值就会被drap函数清理，除非数据的所有权移动到另一个变量上了
+    // 当一个包含heap数据的变量离开作用域时，他的值就会被drop函数清理，除非数据的所有权移动到另一个变量上了
 
     {
         // 变量传给函数后怎么再拿到所有权呢
@@ -170,8 +170,8 @@ fn main() {
     //不可以同时拥有一个可变引用和不可变引用
     {
         let mut s = String::from("he");
+        //但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
         {
-            //但rust可以通过创建新的作用域，来允许非同时的创建多个可变引用
             let s1 = &mut s;
         }
         let s2 = &mut s;
@@ -215,8 +215,8 @@ fn main() {
     // 这样就可以直接被字符串字面值当参数，字符串类型也可以，会使api更通用
     {
         let mut s = String::from("hello world");
-        let world_index = first_world2(&s[..]);
-        let world_index = first_world2("hello world");
+        let world_index = first_world2(&s[..]); //切片是不可变的
+        // let world_index = first_world2("hello world");
         //s.clear(); //error: mutable borrow occurs here
         println!("{}", world_index);
     }
@@ -283,3 +283,48 @@ fn another_function(x: i32) {
 }
 
 const MAX_POINT: u32 = 1000;
+
+// struct
+struct User {
+    username: String,
+    age: u32,
+}
+
+fn assign_struct() {
+    let user1 = User {
+        username: String::from("xxxx"),
+        age: 22,
+    };
+}
+
+fn struct_as_biaodashi() -> User {
+    User {
+        username: String::from("xxxx"),
+        age: 22,
+    }
+}
+
+fn struct_jianxie(username: String) {
+    User { username, age: 22 };
+}
+
+// struct 更新语法
+fn struct_update(user1: User){
+    let user2 = User{
+        username: String::from("xxxx"),
+        ..user1
+    };
+}
+
+// tuple struct
+// tuple struct 整体有个名，但里面元素没有名字
+struct Color(i32,i32,i32);
+struct Point(i32,i32,i32);
+
+//unit like struct 没有任何字段，和空元祖()}类似
+// 适用于需要在某个类型上实现某个trait，但是里面有没有想要存贮的数据
+
+//struct数据的所有权，可以放引用，但需要用到生命周期
+struct UserRef{
+    // username: &str, //error 没有指定生命周期
+}
