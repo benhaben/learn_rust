@@ -373,3 +373,23 @@ fn call() {
     };
     println!("{}", rect.area()); //调用
 }
+
+// 枚举
+enum IPAddrKind{
+    V4,V6,
+}
+fn use_enum(){
+    let four = IPAddrKind::V4;
+}
+
+//将数据附加到枚举
+enum IpAddr{
+    V4(u8,u8,u8,u8),
+    V6(String),
+}
+
+fn use_enum(){
+    let four = IPAddrKind::V4(127,0,0,1);
+}
+
+//为枚举定义方法impl
