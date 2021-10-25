@@ -375,21 +375,49 @@ fn call() {
 }
 
 // 枚举
-enum IPAddrKind{
-    V4,V6,
+enum IPAddrKind {
+    V4,
+    V6,
 }
-fn use_enum(){
+fn use_enum() {
     let four = IPAddrKind::V4;
 }
 
 //将数据附加到枚举
-enum IpAddr{
-    V4(u8,u8,u8,u8),
+enum IpAddr {
+    V4(u8, u8, u8, u8),
     V6(String),
 }
 
-fn use_enum(){
-    let four = IPAddrKind::V4(127,0,0,1);
+fn use_enum() {
+    let four = IpAddr::V4(127, 0, 0, 1);
 }
 
 //为枚举定义方法impl
+
+// Option枚举
+// 定义于标准库中
+// 在Prelude(预导入模块)中
+// 描述了：某个值可能存在（某种类型）或不存在的情况，rust没有null
+// null的问题在于，当你尝试像使用非null值那样使用null值的时候，就会引起某种错误，billion dollar mistake
+// null的概念还是有用的：因为某种原因变为无效或者缺失的值
+// rust类似null概念的枚举
+// enum  Option<T> {
+//     Some(T),
+//     None,
+
+// }
+
+fn option() {
+    let a = Some(6);
+    let n: Option<i32> = None;
+
+    // option<T>和T是不同的类型,所以需要把option<T>转为T才行，这样更安全
+    let x: i8 = 5;
+    let y: Option<i8> = Some(5);
+    // let sum = x + y; //ERROR
+
+    // 避免了假设某个值存在的情况
+    // 比如string a = null;
+    // string b = a+"123"
+}
