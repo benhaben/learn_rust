@@ -216,8 +216,8 @@ fn main() {
     {
         let mut s = String::from("hello world");
         let world_index = first_world2(&s[..]); //切片是不可变的
-        // let world_index = first_world2("hello world");
-        //s.clear(); //error: mutable borrow occurs here
+                                                // let world_index = first_world2("hello world");
+                                                //s.clear(); //error: mutable borrow occurs here
         println!("{}", world_index);
     }
 }
@@ -309,8 +309,8 @@ fn struct_jianxie(username: String) {
 }
 
 // struct 更新语法
-fn struct_update(user1: User){
-    let user2 = User{
+fn struct_update(user1: User) {
+    let user2 = User {
         username: String::from("xxxx"),
         ..user1
     };
@@ -318,13 +318,27 @@ fn struct_update(user1: User){
 
 // tuple struct
 // tuple struct 整体有个名，但里面元素没有名字
-struct Color(i32,i32,i32);
-struct Point(i32,i32,i32);
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
 
 //unit like struct 没有任何字段，和空元祖()}类似
 // 适用于需要在某个类型上实现某个trait，但是里面有没有想要存贮的数据
 
 //struct数据的所有权，可以放引用，但需要用到生命周期
-struct UserRef{
+struct UserRef {
     // username: &str, //error 没有指定生命周期
 }
+
+#[derive(Debug)]
+struct Rectangele {
+    width: u32,
+    length: u32,
+}
+fn debug_print(){
+    let rect = Rectangele{
+        width:33,
+        length:22,
+    };
+    println!("{:#?}", rect);
+}
+
