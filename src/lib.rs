@@ -25,3 +25,26 @@ pub fn out() {
 // pub use std::io::Result as ioResult;
 
 
+// 使用外部包
+// 1、cargo.toml添加依赖包， https://crates.io/
+// 2、use将特定条目引入作用域
+
+//切换国内源
+// 进入.cargo
+// touch config
+// 贴上源 https://cargo.budshome.com/reference/source-replacement.html
+// std也是外部包，但不需要引用
+
+// 也可以这样
+// use::std::{
+//     cmp::Ordering,
+//     io
+// }
+
+// use::std::{
+//      self,
+//     cmp::Ordering,
+//     io
+// }
+
+// use::std*, 一般不这样用，测试的时候可能会导入所有测试模块
