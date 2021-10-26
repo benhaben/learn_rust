@@ -389,7 +389,7 @@ enum IpAddr {
     V6(String),
 }
 
-fn use_enum() {
+fn use_enum1() {
     let four = IpAddr::V4(127, 0, 0, 1);
 }
 
@@ -405,7 +405,6 @@ fn use_enum() {
 // enum  Option<T> {
 //     Some(T),
 //     None,
-
 // }
 
 fn option() {
@@ -414,7 +413,7 @@ fn option() {
 
     // option<T>和T是不同的类型,所以需要把option<T>转为T才行，这样更安全
     let x: i8 = 5;
-    let y: Option<i8> = Some(5);
+    // let y: Option<i8> = Some(5);
     // let sum = x + y; //ERROR
 
     // 避免了假设某个值存在的情况
@@ -424,3 +423,61 @@ fn option() {
 
 //rust move borrow copy
 //https://zhuanlan.zhihu.com/p/367308052 
+
+// option match
+// https://www.jianshu.com/p/974d83a1158e
+
+// rust代码组织
+// - 哪些细节可以暴露
+// - 作用域内哪些名称有效
+
+// 模块系统
+// package - 包：cargo的特性，让你构建、测试、共享crate
+// crate 单元包： 一个模块树，它可产生一个library或者可执行文件
+// module 模块、use：让你控制代码的组织、作用域、私有路径
+// path 路径：为struct function或者module等命名的方式
+
+
+// crate
+// - binary
+// - library
+
+// crate root
+// - 源代码文件
+// rust编译器从这里开始，组成你的create的根module
+
+// package
+// 包含一个cargo.toml，他描述了如何构建这些crates
+// 只能包含0-1个library crate
+// 可以包含任意数量的binary crate
+// 但必须至少包含一个crate library或者binary
+
+// cargo惯例
+// src/main.rs:
+// - binary crate 的 crate root
+// - crate名与package名相同
+// src/lib.rs:
+// package包含一个library crate
+// library create的crate root
+// - crate名与package名相同
+// cargo把crate root 文件交给rustc来构建library或者binary
+// 一个package可以同时包含src/main.rs和src/lib.rs
+// - 一个binary crate，一个library crate
+//  - 名称与package名相同
+// 一个package可以有多个binary crate
+// - 文件放在src/bin
+// - 每个文件是单独的binary crate
+
+// crate的作用
+// 讲相关的功能放到一个作用域，防止冲突，复用
+
+// module控制作用域和私有性，在crate内部将代码进行分组，增加刻度性，复用，控制私有性 public， private
+// mod关键字，可以嵌套，可以包含struct，enum，常量，trait，函数
+// 例子：lib。rs
+
+// 路径
+// 为了在rust中找到某个item需要使用路径
+// 路径有两种形式
+// - 绝对路径：从crate root 开始，使用crate名字或者字面值crate，大部分人使用这个
+// -相对理解：从当前模块开始，使用self，super或当前模块标识符
+// 路径至少有一个标识符组成，标识符之间使用::
