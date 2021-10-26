@@ -1,8 +1,10 @@
 mod Father {
     pub mod Son {
-        pub  fn say() {}
+        pub  fn say() {
+            super::Son::say();
+        }
     }
-    fn say() {}
+    fn say1() {}
 }
 
 pub fn out() {
