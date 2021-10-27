@@ -57,7 +57,7 @@ fn main() {
 
     // 字节方式看待
     for b in w.bytes(){
-        println!("{}",b);
+        println!("----{}",b);
     }
 
     //标量值
@@ -66,7 +66,7 @@ fn main() {
     }
 
     // 切割
-    let s = &w[0..2];
+    let s = &w[0..3];
     println!("xxxxxx-{}",s);
 
     //error:必须合理的切割

@@ -458,7 +458,7 @@ fn option() {
 // - crate名与package名相同
 // src/lib.rs:
 // package包含一个library crate
-// library create的crate root
+// library crate的crate root
 // - crate名与package名相同
 // cargo把crate root 文件交给rustc来构建library或者binary
 // 一个package可以同时包含src/main.rs和src/lib.rs
