@@ -83,6 +83,6 @@ mod test{
     #[test]
     fn test5() {
         let a = 2;
-        add_two1(a);
+        add_two3(a);
     }
 }

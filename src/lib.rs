@@ -95,3 +95,7 @@ pub fn notifyR() -> impl Summary{
         headline:"xxxx".to_string()
     }
 }
+
+pub fn add_two(a: i32) -> i32 {
+    a + 2
+}
