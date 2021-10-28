@@ -21,14 +21,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 fn main1() {
     let string1 = String::from("abcd");
-    let result;
+    let result:String;
     {
         let string2 = String::from("xyz");
-        result = longest(string1.as_str(), string2.as_str()); // error: borrowed value does not live long enough
+        // result = longest(string1.as_str(), string2.as_str()); // error: borrowed value does not live long enough
 
         // longest() 借用检查器查看函数签名，发现返回值和x,y都是’a生命周期，那么取短的那个，就是string2，所以返回值和string2的生命周期一样
     }
-    println!("{}", result);
+    // println!("{}", result);
 }
 
 // 指定生命周期参数的方式依赖于函数所做的事情， 函数返回只和x有关，所以只需要给x指定‘a生命周期即可
@@ -41,7 +41,8 @@ fn longest1<'a>(x: &'a str, y: &str) -> &'a str {
 // - 这就是悬垂引用：该值在函数结束时就走出了作用域
 fn longest2<'a>(x: &'a str, y: &str) -> &'a str {
     let ret = String::from("xyz");
-    ret.as_str()
+    // ret.as_str()
+    "xxx"
 }
 
 // 所以rust不用于返回悬垂引用，只能返回值，把上面的引用改成String即可编译通过
@@ -110,3 +111,4 @@ impl<'a> Apple<'a> {
 // ’static是一个特殊的生命周期：整个程序的持续时间
 // 所有的字符串字面值都有'static生命周期
 // let s:&'static str = "xxxx";
+
