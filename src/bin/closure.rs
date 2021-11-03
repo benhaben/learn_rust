@@ -25,7 +25,7 @@ fn main(){
 struct Cacher<T>
 where T: Fn(u32)->u32{
     calc:T,
-    value:Option<u32>,
+    value:Option<u32>, // 只能计算一次，可以用hashmap
 }
 
 impl<T> Cacher<T>
