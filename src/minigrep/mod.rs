@@ -44,6 +44,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     // }
     // results
 
+    // 零开销抽象，不会引入额外开销，反而更快
     contents
         .lines()
         .filter(|line| line.contains(query))
