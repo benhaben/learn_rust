@@ -1,6 +1,7 @@
 use std::fmt::{Debug, Display};
 
-mod Father;
+pub mod minigrep;
+pub mod Father;
 
 pub fn out() {
     crate::Father::Son::say(); //绝对路径。大部分人使用这个

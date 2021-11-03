@@ -1,37 +1,21 @@
-use std::{env, fs};
+use std::{env, error::Error, fs,  process};
+use guessing_game::minigrep::{Config};
 
 fn main() {
     let args: Vec<String> = env::args().collect(); //不支持非法Unicode
     println!("{:?}", args);
 
-    let config = Config::new(&args);
-
-    println!("search for {}", config.query);
-    println!("in file {}", config.filename);
-
-    let contents = fs::read_to_string(config.filename).expect("Something wrong!!!");
-
-    println!("with test:\n{}", contents);
-}
-
-struct Config {
-    query: String,
-    filename: String,
-}
-
-impl Config {
-    fn new(args: &[String]) -> Config {
-        let query = args[1].clone();
-        let filename = args[2].clone();
-        Config { query, filename }
+    let config = Config::new(&args).unwrap_or_else(|err|{
+        println!("error args:{}", err);
+        process::exit(1);//这样就不会打印很多没用的错误
+    });
+    
+    if let Err(err) = guessing_game::minigrep::run(config){
+        println!("error run:{}", err);
+        process::exit(1);//这样就不会打印很多没用的错误
     }
 }
 
-fn parse(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let filename = args[2].clone();
-    Config { query, filename }
-}
 
 // 二进制程序关注点分离的指导原则
 // 将程序拆分为main.rs和lib.rs，将业务逻辑放到lib.rs
