@@ -42,8 +42,8 @@ where T: Fn(u32) -> u32,
         match self.value{
             Some(v) => v,
             None => {
-                let v = (self.calc)(arg)
-                self.value = Some(V);
+                let v = (self.calc)(arg);
+                self.value = Some(v);
                 v
             }
         }
