@@ -22,7 +22,7 @@ impl Config {
             return Err("not enough arguments!");
         }
 
-        let query = args[1].clone();
+        let query = args[1].clone(); //TODO: 使用迭代器
         let filename = args[2].clone();
         Ok(Config { query, filename })
     }
@@ -35,13 +35,19 @@ pub fn parse(args: &[String]) -> Config {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push(line);
-        }
-    }
-    results
+    //todo： 使用迭代器
+    // let mut results = Vec::new();
+    // for line in contents.lines() {
+    //     if line.contains(query) {
+    //         results.push(line);
+    //     }
+    // }
+    // results
+
+    contents
+        .lines()
+        .filter(|line| line.contains(query))
+        .collect()
 }
 
 #[cfg(test)]
