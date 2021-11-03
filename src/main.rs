@@ -422,7 +422,7 @@ fn option() {
 }
 
 //rust move borrow copy
-//https://zhuanlan.zhihu.com/p/367308052 
+//https://zhuanlan.zhihu.com/p/367308052
 
 // option match
 // https://www.jianshu.com/p/974d83a1158e
@@ -436,7 +436,6 @@ fn option() {
 // crate 单元包： 一个模块树，它可产生一个library或者可执行文件
 // module 模块、use：让你控制代码的组织、作用域、私有路径
 // path 路径：为struct function或者module等命名的方式
-
 
 // crate
 // - binary

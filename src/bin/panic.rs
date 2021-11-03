@@ -35,7 +35,7 @@ impl Guess {
     }
 
     //getter，私有的，保证必须使用new去创建
-    pub fn value(&self) -> i32{
+    pub fn value(&self) -> i32 {
         self.value
     }
 }

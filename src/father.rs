@@ -1,5 +1,5 @@
-pub mod Son{
-    pub  fn say() {
+pub mod Son {
+    pub fn say() {
         super::Son::say();
     }
 }

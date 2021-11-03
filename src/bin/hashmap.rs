@@ -21,7 +21,7 @@ fn main() {
     let text = "x x y y z";
     let mut map = HashMap::new();
 
-    for word in text.split_whitespace(){
+    for word in text.split_whitespace() {
         let count = map.entry(word).or_insert(0);
         *count += 1;
     }

@@ -75,9 +75,9 @@ fn main() {}
 // 集成测试在不同的目录，他不需要#[cfg(test)]
 
 #[cfg(test)]
-mod test{
+mod test {
     // 可以测试私有函数
-     fn add_two3(a: i32) -> Result<(), String> {
+    fn add_two3(a: i32) -> Result<(), String> {
         Ok(())
     }
     #[test]

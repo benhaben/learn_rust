@@ -1,7 +1,7 @@
 use std::fmt::{Debug, Display};
 
-pub mod minigrep;
 pub mod Father;
+pub mod minigrep;
 
 pub fn out() {
     crate::Father::Son::say(); //绝对路径。大部分人使用这个
@@ -91,9 +91,9 @@ where
 }
 
 // trait实现返回类型.但必须只能返回同一种类型
-pub fn notifyR() -> impl Summary{
-    NewsArticle{
-        headline:"xxxx".to_string()
+pub fn notifyR() -> impl Summary {
+    NewsArticle {
+        headline: "xxxx".to_string(),
     }
 }
 

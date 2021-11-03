@@ -1,4 +1,9 @@
-use std::{error::Error, fs::File, io::{self, ErrorKind, Read}, num::FpCategory};
+use std::{
+    error::Error,
+    fs::File,
+    io::{self, ErrorKind, Read},
+    num::FpCategory,
+};
 
 // rust的可靠性：错误处理
 // -大部分情况下：在编译时提示错误，并处理
@@ -81,7 +86,7 @@ fn read_username_from_file1() -> Result<String, io::Error> {
 // main函数的返回类型也可以是：Result<T,E>
 // Box<dyn Error>是trait对象：简单理解为任何可能的错误类型
 
-fn main1() ->Result<(),Box<dyn Error>>{
+fn main1() -> Result<(), Box<dyn Error>> {
     let f = File::open("hello.txt")?;
     Ok(())
 }

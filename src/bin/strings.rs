@@ -52,22 +52,22 @@ fn main() {
     // rust字符串不支持索引访问
     // 字符都是unicode标量值，索引不能保证能访问到合法的字符
     // 字节，标量值，字形簇 bytes，scalar value，grapheme cluster:https://www.zhihu.com/question/22132719
- 
+
     let w = "啊是啊是大户";
 
     // 字节方式看待
-    for b in w.bytes(){
-        println!("----{}",b);
+    for b in w.bytes() {
+        println!("----{}", b);
     }
 
     //标量值
-    for b in w.chars(){
-        println!("{}",b);
+    for b in w.chars() {
+        println!("{}", b);
     }
 
     // 切割
     let s = &w[0..3];
-    println!("xxxxxx-{}",s);
+    println!("xxxxxx-{}", s);
 
     //error:必须合理的切割
     // let s1 = &w[0..3];
@@ -75,6 +75,4 @@ fn main() {
 
     // 好处：不用后期处理非asii编码
     // 坏处：不能索引，utf-8
-
-
 }
