@@ -1,24 +1,36 @@
 use std::{env, fs};
 
 fn main() {
-    let args: Vec<String> = env::args().collect();//不支持非法Unicode
+    let args: Vec<String> = env::args().collect(); //不支持非法Unicode
     println!("{:?}", args);
 
-    let (query, filename) = parse(&args);
+    let config = Config::new(&args);
 
-    println!("search for {}",query);
-    println!("in file {}", filename);
+    println!("search for {}", config.query);
+    println!("in file {}", config.filename);
 
-    let contents = fs::read_to_string(filename).expect("Something wrong!!!");
+    let contents = fs::read_to_string(config.filename).expect("Something wrong!!!");
 
     println!("with test:\n{}", contents);
-
 }
 
-fn parse(args: &Vec<String>) -> (&String, &String) {
-    let query = &args[1];
-    let filename = &args[2];
-    (query, filename)
+struct Config {
+    query: String,
+    filename: String,
+}
+
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = args[1].clone();
+        let filename = args[2].clone();
+        Config { query, filename }
+    }
+}
+
+fn parse(args: &[String]) -> Config {
+    let query = args[1].clone();
+    let filename = args[2].clone();
+    Config { query, filename }
 }
 
 // 二进制程序关注点分离的指导原则
