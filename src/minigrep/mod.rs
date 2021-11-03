@@ -56,6 +56,6 @@ mod tests {
         safe,faster,productive.
         ";
 
-        assert_eq!(vec!["safe"], search(query, contents))
+        assert_eq!(vec!["safe"], search(query, contents));
     }
 }
