@@ -19,16 +19,24 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     }
 }
 
+// fn longest(x: & str, y: &str) -> &str {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+
 fn main1() {
     let string1 = String::from("abcd");
-    let result:String;
-    {
-        let string2 = String::from("xyz");
-        // result = longest(string1.as_str(), string2.as_str()); // error: borrowed value does not live long enough
+    let result: &str;
+    let string2 = String::from("xyz");
+    result = longest(string1.as_str(), string2.as_str()); // error: borrowed value does not live long enough
 
-        // longest() 借用检查器查看函数签名，发现返回值和x,y都是’a生命周期，那么取短的那个，就是string2，所以返回值和string2的生命周期一样
-    }
-    // println!("{}", result);
+    // longest() 借用检查器查看函数签名，发现返回值和x,y都是’a生命周期，那么取短的那个，就是string2，所以返回值和string2的生命周期一样
+    println!("{}", result);
+    let result = longest2(string1.as_str(), string2.as_str());
+    println!("{}", result);
 }
 
 // 指定生命周期参数的方式依赖于函数所做的事情， 函数返回只和x有关，所以只需要给x指定‘a生命周期即可
@@ -41,24 +49,29 @@ fn longest1<'a>(x: &'a str, y: &str) -> &'a str {
 // - 这就是悬垂引用：该值在函数结束时就走出了作用域
 fn longest2<'a>(x: &'a str, y: &str) -> &'a str {
     let ret = String::from("xyz");
+    // 所以rust不用于返回悬垂引用，只能返回值，把上面的引用改成String即可编译通过
     // ret.as_str()
     "xxx"
 }
 
-// 所以rust不用于返回悬垂引用，只能返回值，把上面的引用改成String即可编译通过
-
 // 结构体中生命周期标注
+#[derive(Debug)]
 struct Apple<'a> {
     part: &'a str,
 }
 
 fn main() {
     let novel = String::from("yin shen");
-    let first = novel.split(" ").next().expect("can not find ' ' ");
+    let first;
+    {
+        first = novel.split(" ").next().expect("can not find ' ' ");
+    }
 
     let i = Apple { part: first };
 
     // first 生命周期比i长
+
+    println!("{:#?}", i.level());
 }
 
 // 生命周期的省略
@@ -91,14 +104,14 @@ fn main() {
 
 // 假设我们是编译器2
 // fn longest2(x: &str, y:  &str) -> &str {
-// fn longest2<'a，'b>(x: &'a str, y:  &'b str) -> &str { 规则1
+// fn longest2<'a，'b>(x: &'a str, y:  &'b str) -> &str { 规则2
 // 无法计算出返回类型的生命周期，编译器报错
 
 // 假设我们是编译器3 - 方法
 impl<'a> Apple<'a> {
     //规则1
-    fn level(&self) -> i32 {
-        1
+    fn level(&self) -> &str {
+        " "
     }
 
     //规则3
@@ -111,4 +124,3 @@ impl<'a> Apple<'a> {
 // ’static是一个特殊的生命周期：整个程序的持续时间
 // 所有的字符串字面值都有'static生命周期
 // let s:&'static str = "xxxx";
-
