@@ -10,3 +10,4 @@ panic = 'abort'
 
 [dependencies]
 rand = "^0.8.4"
+

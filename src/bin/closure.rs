@@ -11,7 +11,7 @@
 
 fn main() {
     let x = vec![1, 2, 3];
-    // 在参数列表前使用move关键字可以强制闭包获取所有钱，线程好用
+    // 在参数列表前使用move关键字可以强制闭包获取所有劝，线程好用
     let equal_to_x = move |z| z == x;
     // println!("{:?}",x);//error value borrowed here after move
     let y = vec![1, 2, 3];
