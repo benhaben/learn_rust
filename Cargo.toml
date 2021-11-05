@@ -11,3 +11,14 @@ panic = 'abort'
 [dependencies]
 rand = "^0.8.4"
 
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+
+# 通过release profile来自定义构建
+# 在https://crates.io/上发布库
+# 通过workspace组织大工程
+# 从https://crates.io来安装库
+# 使用自定义命令扩展cargo
