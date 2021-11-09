@@ -115,3 +115,9 @@ pub fn notifyR() -> impl Summary {
 pub fn add_two(a: i32) -> i32 {
     a + 2
 }
+
+
+// pub use 重新导出
+// my_crate::some_mudule::anther_moudle::::UsefulType;
+// 方便： mycrate::UsefulType
+// pub use self::kinds::PrimaryColor
