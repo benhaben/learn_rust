@@ -1,4 +1,5 @@
-
+// 为包含注释的项添加文档注释，描述crate，整个包的注释 //!
+//! #guessing_game mod
 
 use std::fmt::{Debug, Display};
 
