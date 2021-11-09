@@ -1,11 +1,25 @@
+
+
 use std::fmt::{Debug, Display};
 
 pub mod Father;
 pub mod minigrep;
 
+// #Examples, #Panics, Safety
+
+/// cargo doc --open
+///
+/// # Example
+/// ```
+/// let arg = 6;
+/// let answer = guessing_game::out();
+///
+/// assert_eq!((), answer)
+/// ```
 pub fn out() {
-    crate::Father::Son::say(); //绝对路径。大部分人使用这个
-    Father::Son::say(); //相对路径
+    println!("out.....")
+    // crate::Father::Son::say(); //绝对路径。大部分人使用这个
+    // Father::Son::say(); //相对路径
 }
 
 // 模块不仅可以组织·代码，还可以定义私有边界

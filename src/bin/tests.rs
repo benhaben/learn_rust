@@ -22,15 +22,15 @@ fn test1() {
 #[test]
 fn test2() {
     let a = 2;
-    assert_eq!(add_two(a), 1, "我是自定义信息-{}", "哈哈");
+    assert_ne!(add_two(a), 1, "我是自定义信息-{}", "哈哈");
 }
 
 // 是否发生的panic
 #[test]
-#[should_panic(expected = "期望发生的panic文字")]
+// #[should_panic(expected = "期望发生的panic文字")]
 fn test3() {
     let a = 2;
-    assert_eq!(add_two(a), 1, "没有发生panic,失败");
+    assert_ne!(add_two(a), 1, "没有发生panic,失败");
 }
 
 mod test_mod {
