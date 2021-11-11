@@ -16,8 +16,3 @@ rand = "^0.8.4"
 opt-level = 0
 
 
-# 通过release profile来自定义构建
-# 在https://crates.io/上发布库
-# 通过workspace组织大工程
-# 从https://crates.io来安装库
-# 使用自定义命令扩展cargo
