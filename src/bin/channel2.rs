@@ -8,7 +8,6 @@
 // 任何完全又send类型组成的类型也被标记为Send
 // 除了原始指针之外，几乎所有的基础类型都是Send
 
-
 // 实现Sync的类型可以安全的被多个线程引用
 // 如果T是Sync，那么&T就是Send - 引用可以被安全的送往另一个线程
 // 基础类型都是Sync
@@ -24,3 +23,4 @@ Because types that are made up of Send and Sync traits are automatically also Se
 
 Manually implementing these traits involves implementing unsafe Rust code. We’ll talk about using unsafe Rust code in Chapter 19; for now, the important information is that building new concurrent types not made up of Send and Sync parts requires careful thought to uphold the safety guarantees. “The Rustonomicon” has more information about these guarantees and how to uphold them.
  */
+fn main(){}

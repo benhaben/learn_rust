@@ -1,4 +1,3 @@
-
 pub trait Messenger {
     fn send(&self, msg: &str);
 }
@@ -38,7 +37,7 @@ where
     }
 }
 
-fn main(){}
+fn main() {}
 
 // #[cfg(test)]
 // mod tests {
@@ -72,8 +71,6 @@ fn main(){}
 //         assert_eq!(mock_messenger.sent_messages.len(), 1);
 //     }
 // }
-
-
 
 #[cfg(test)]
 mod tests1 {

@@ -1,4 +1,3 @@
-
 // rust方法实现状态模式
 // rust可以实现多种模式
 
@@ -46,7 +45,6 @@ impl PendingReviewPost {
         }
     }
 }
-
 
 fn main() {
     let mut post = Post::new();

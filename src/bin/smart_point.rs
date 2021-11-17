@@ -48,28 +48,26 @@ impl<T> Deref for MyBox<T> {
     }
 }
 
-impl <T> Drop for MyBox<T> {
-
+impl<T> Drop for MyBox<T> {
     fn drop(&mut self) {
         //自动释放处理，rust不允许手动调用，但可以用全局的drop函数
         println!("xxxxdrop")
     }
-    
 }
 
-fn hello(name: &str){
+fn hello(name: &str) {
     println!("hello, {}", name);
 }
 
-fn box3(){
+fn box3() {
     let x = 5;
     let y = MyBox::new(x);
 
     assert_eq!(5, *y);
-    // *(y.deref()) 
+    // *(y.deref())
 
     // deref coercion,编译时完成
-    let m  = MyBox::new(String::from("Rust"));
+    let m = MyBox::new(String::from("Rust"));
     // &m -> &MyBox<String>
     // deref &String
     // deref &str

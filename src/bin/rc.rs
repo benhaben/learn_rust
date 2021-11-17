@@ -4,7 +4,6 @@
 // Rc::strong_count(&a)：获得引用计数
 // Rc::weak_count函数
 
-
 // pub enum List {
 //     Cons(i32, Box<List>),
 //     Nil,
@@ -38,8 +37,4 @@ fn main() {
 
     let b = Cons(3, Rc::clone(&a));
     let c = Cons(4, Rc::clone(&a)); // error
-
 }
-
-
-
