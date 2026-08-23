@@ -1,0 +1,23 @@
+# Rust 面试复习示例
+
+复习表里的代码都在这里，每个主题一个可执行文件，注释里讲清 move / Copy / 借用等概念。
+
+```bash
+cd interview
+
+# 编译全部
+cargo build --bins
+
+# 只跑一个主题（文件名去掉 .rs）
+cargo run --bin 01_ownership
+cargo run --bin 06_arc_mutex
+cargo run --bin 12_tokio_spawn
+```
+
+| 编号 | 级别 | 命令 |
+|---|---|---|
+| 01–14 | 必考 | `01_ownership` … `14_string_str` |
+| 15–27 | 进阶 | `15_object_safety` … `27_gats_async_trait` |
+| 28–34 | 压轴 | `28_pin` … `34_pyo3_gil` |
+
+带 `tokio` 的 bin：`12_tokio_spawn`、`13_mutex_await`、`25_async_cancel`、`29_self_ref_fut`、`32_custom_future`。

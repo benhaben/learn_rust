@@ -1,0 +1,11 @@
+[package]
+name = "rust-interview"
+version = "0.1.0"
+edition = "2021"
+description = "Rust 面试复习示例：每个 bin 对应复习表里的一个主题，可单独编译运行"
+
+[dependencies]
+anyhow = "1"
+thiserror = "1"
+bytes = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "sync"] }
