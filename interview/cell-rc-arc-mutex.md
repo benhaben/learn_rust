@@ -40,6 +40,37 @@ C++ 里万事 `shared_ptr` 往往能编过。Rust 把那一包拆开，好让编
 
 能写成 `&mut self` 就写 `&mut self`。Cell 是绕开「`&` 不能改」，不是默认写法。
 
+## 有了 Cell 为什么还要 RefCell
+
+`Cell` 只能**整颗拿出来 / 整颗换掉**，不能借住里面改一截。`String`、`Vec`、结构体改一个字段必须用 `RefCell`。
+
+```rust
+let c = Cell::new(3);
+let n = c.get();        // 复制出一份 i32
+c.set(n + 1);           // 整颗换成 4，没有 &mut i32
+
+let v = RefCell::new(vec![1]);
+v.borrow_mut().push(2); // 真正拿到 &mut Vec
+assert_eq!(v.borrow()[1], 2);
+```
+
+| | `Cell<T>` | `RefCell<T>` |
+|---|---|---|
+| 怎么改 | `get` / `set` 整颗换 | `borrow` / `borrow_mut` 借里面 |
+| 适合 | `i32`、`bool`、小 Copy | `String`、`Vec`、结构体、图 |
+| 检查 | 无（不产生内部引用） | 运行期借计数 |
+| 线程 | 都不是 Sync | 都不是 Sync |
+
+`Rc<Cell<i32>>`：多人共享一个计数。`Rc<RefCell<Vec<_>>>`：多人共享一个列表还要 `push`。
+
+`borrow_mut` 就是在**运行期模拟**编译器那条「同一时刻只能有一个 `&mut`」：
+
+- 任意多个 `borrow()` ≡ 任意多个 `&T`
+- 唯一一个 `borrow_mut()` ≡ 唯一 `&mut T`
+- 两种同时活着，或两个 `borrow_mut` 重叠 → **panic**（编译能过）
+
+`Mutex::lock` 也是同一类互斥，多了「卡住别的线程等」，并且是 `Sync`。规则没变，检查从编译期挪到运行期，逻辑写错会推迟爆炸，所以能 `&mut self` 就别上 `RefCell`。
+
 ## 什么时候必须用 Cell / RefCell
 
 判据：**这时候你拿不到 `&mut`，但还是要改一个字段。**
@@ -104,5 +135,6 @@ Rust 不让这件事默默发生：共享一层，改另一层，跨线程再加
 
 - `Box` 管存放，`Rc` 管单线程多主人，`Arc` 管跨线程多主人
 - `Cell` 绕的是「`&` 不能改」，不是偷偷 `&mut`；跨线程改用 `Mutex`/`Atomic`，别用 `Cell`
-- 先问能不能名正言顺拿到 `&mut`：能就别上 Cell
+- `Cell` 换整颗；`RefCell` 借里面改。`borrow_mut` = 运行期的唯一 `&mut`
+- 先问能不能名正言顺拿到 `&mut`：能就别上 Cell / RefCell
 - `shared_ptr` 把所有权和线程安全搅在一起；Rust 拆开，所以类型多，事故少
