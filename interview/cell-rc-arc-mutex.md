@@ -117,6 +117,34 @@ fn walk(n: &Node) {
 
 图、observer 同一类：A 指着 B，B 指着 A，谁都没有独一无二的 `&mut`。
 
+## 「有 `&T` 就不能改；有时 API 必须是 `&self`」
+
+`&T` 是共享只读，不能 `n += 1`。`fn inc(&self)` 拿到的就是 `&Self`，按规则也不能改字段。
+
+有时给不出 `&mut self`：值已在 `Rc` 里、外面还有另一个句柄。这时方法只能是 `&self`，字段才用 `Cell`。
+
+**不要为了通用性默认上 Cell。** 通用做法是方法继续 `&mut self`，共享的人在**外面**包：
+
+```rust
+struct Counter { n: i32 }
+impl Counter {
+    fn inc(&mut self) { self.n += 1; }
+}
+
+let mut c = Counter { n: 0 };
+c.inc();
+
+let c = Rc::new(RefCell::new(Counter { n: 0 }));
+c.borrow_mut().inc();
+
+let c = Arc::new(Mutex::new(Counter { n: 0 }));
+c.lock().unwrap().inc();
+```
+
+里面不用知道 Cell。一上来全员 Cell 会绕开借用检查、破坏 Sync、读代码不知道谁在改。
+
+默认策略：先 `&mut self`；数据结构需要 `Rc`/`Arc` 还要改，再包 `Rc<RefCell<T>>` / `Arc<Mutex<T>>`。只有实现里已经走着 `&self` + `Rc` 邻居、还要改自己某一个字段，才把**那一个字段**做成 Cell。
+
 ## 单线程为什么还要 Rc 引用计数
 
 单线程 ≠ 只有一个变量握着这份数据。同一线程里可以有很多个 `Rc` 指向同一块（树里两个父节点共一个子、HashMap 一份 + 当前选中再握一份）。没有计数，谁 `drop` 谁释放，另一个还指着就悬空。
@@ -137,4 +165,5 @@ Rust 不让这件事默默发生：共享一层，改另一层，跨线程再加
 - `Cell` 绕的是「`&` 不能改」，不是偷偷 `&mut`；跨线程改用 `Mutex`/`Atomic`，别用 `Cell`
 - `Cell` 换整颗；`RefCell` 借里面改。`borrow_mut` = 运行期的唯一 `&mut`
 - 先问能不能名正言顺拿到 `&mut`：能就别上 Cell / RefCell
+- 通用性靠外面包 `RefCell`/`Mutex`，不靠里面默认 Cell
 - `shared_ptr` 把所有权和线程安全搅在一起；Rust 拆开，所以类型多，事故少
