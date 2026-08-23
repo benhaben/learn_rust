@@ -32,3 +32,4 @@ cargo run --bin 12_tokio_spawn
 - [drop-raii-ffi.md](drop-raii-ffi.md)：Drop、RAII、forget、FFI、ManuallyDrop
 - [iterator-ownership.md](iterator-ownership.md)：into_iter、copied、turbo-fish
 - [result-enum.md](result-enum.md)：Result 二选一、`?` 对齐 E
+- [tokio-future-pin.md](tokio-future-pin.md)：tokio、Future、Pin、spawn
