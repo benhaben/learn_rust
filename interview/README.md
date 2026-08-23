@@ -30,3 +30,4 @@ cargo run --bin 12_tokio_spawn
 - [macros-attributes.md](macros-attributes.md)：宏、属性、thiserror、`#[from]`
 - [ownership-move-closures.md](ownership-move-closures.md)：主人 / 外号 / move / FnOnce·FnMut·Fn
 - [drop-raii-ffi.md](drop-raii-ffi.md)：Drop、RAII、forget、FFI、ManuallyDrop
+- [iterator-ownership.md](iterator-ownership.md)：into_iter 拿走 Vec、drain、惰性
