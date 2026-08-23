@@ -21,3 +21,8 @@ cargo run --bin 12_tokio_spawn
 | 28–34 | 压轴 | `28_pin` … `34_pyo3_gil` |
 
 带 `tokio` 的 bin：`12_tokio_spawn`、`13_mutex_await`、`25_async_cancel`、`29_self_ref_fut`、`32_custom_future`。
+
+笔记：
+
+- [cell-rc-arc-mutex.md](cell-rc-arc-mutex.md)：Box / Rc / Arc / Cell / Mutex 怎么选
+- [cpp-vs-rust-smart-pointers.md](cpp-vs-rust-smart-pointers.md)：和 C++ `shared_ptr` 的对照
