@@ -27,3 +27,4 @@ cargo run --bin 12_tokio_spawn
 - [cell-rc-arc-mutex.md](cell-rc-arc-mutex.md)：Box / Rc / Arc / Cell / Mutex 怎么选
 - [cpp-vs-rust-smart-pointers.md](cpp-vs-rust-smart-pointers.md)：和 C++ `shared_ptr` 的对照
 - [unwrap-deref-mutex.md](unwrap-deref-mutex.md)：unwrap、`*`、MutexGuard、map/collect
+- [macros-attributes.md](macros-attributes.md)：宏、属性、thiserror、`#[from]`
