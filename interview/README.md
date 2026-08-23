@@ -29,3 +29,4 @@ cargo run --bin 12_tokio_spawn
 - [unwrap-deref-mutex.md](unwrap-deref-mutex.md)：unwrap、`*`、MutexGuard、map/collect
 - [macros-attributes.md](macros-attributes.md)：宏、属性、thiserror、`#[from]`
 - [ownership-move-closures.md](ownership-move-closures.md)：主人 / 外号 / move / FnOnce·FnMut·Fn
+- [drop-raii-ffi.md](drop-raii-ffi.md)：Drop、RAII、forget、FFI、ManuallyDrop
