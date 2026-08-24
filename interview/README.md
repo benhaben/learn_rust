@@ -39,3 +39,4 @@ cargo run --bin 12_tokio_spawn
 - [assoc-type.md](assoc-type.md)：关联类型 vs 泛型、()、涡轮鱼
 - [static-hrtb.md](static-hrtb.md)：'static、HRTB、for<'a>
 - [cow.md](cow.md)：Cow、写时克隆、Borrowed vs Owned
+- [typestate.md](typestate.md)：编译期状态机、PhantomData
