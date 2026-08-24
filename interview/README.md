@@ -34,3 +34,4 @@ cargo run --bin 12_tokio_spawn
 - [result-enum.md](result-enum.md)：Result 二选一、`?` 对齐 E
 - [tokio-future-pin.md](tokio-future-pin.md)：tokio、Future、Pin、spawn
 - [mutex-guard-await.md](mutex-guard-await.md)：Mutex vs Guard、不能跨 await
+- [string-str-dst.md](string-str-dst.md)：String / &str、Deref、DST
