@@ -11,6 +11,8 @@
 //!
 //! 本文件用“Rust 假装自己是 C 库”：`extern "C"` 定义 + 同文件 `#[no_mangle]` 实现，
 //! 这样不用真的链一个 .so 也能编译。真对接交易所 SDK 时，一边是 .h/.so，一边是 `extern "C"`。
+//!
+//! 底层调 C 远多于 C++：FFI 只承诺 C ABI。C++ 要先包一层 `extern "C"`。
 
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
