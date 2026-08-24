@@ -12,9 +12,12 @@
 //!
 //! # HRTB：`for<'a> Fn(&'a str)`
 //!
-//! 普通 `fn foo(s: &str)` 的寿命由调用处推断一次。
-//! `for<'a>` 表示：**任意**寿命的 `&'a str` 都能传进去。
-//! 闭包如果把输入引用存到自己捕获的结构里，就不能对所有 `'a` 成立，HRTB 会拒。
+//! HRTB = Higher-Ranked Trait Bounds。`for` = 对所有寿命。
+//! 约束的是闭包入参那一次借用能有多短：多短都行。
+//! 主要为了：本函数栈上刚造的 `local`，能把 `&local` 传给 `f`，且 `f` 不能把引用藏起来。
+//! `Fn(&str)` 在这种位置通常等于写出 `for<'a>`；业务里很少手写。
+//!
+//! `fn apply<'a, F: Fn(&'a str)>` 则是调用 apply 时定死一个 `'a`，罩不住里面的新局部变量。
 
 fn spawnable<T: Send + 'static>(t: T) {
     std::thread::spawn(move || {
