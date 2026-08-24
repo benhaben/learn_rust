@@ -52,8 +52,12 @@
 //! 不进 vtable，`dyn Work` 上等于没有它。其余方法仍然对象安全，`Box<dyn Work>` 能写。
 //! 没有这句的话，光是 `helper<T>` 就会让整个 `Work` 不能当 `dyn` 用。
 //!
+//! `Work` 能 dyn，是因为 `run` / `clone_box` 本来就能进表，不是因为写了 `Self: Sized`。
+//! `Clone` 不能 dyn，是因为 `clone -> Self`：类型擦掉后，调用方不知道返回值多大。
+//! 具体类型照样 `.clone()`；已经是 `Box<dyn Work>` 才需要 `clone_box`。
+//!
 //! 口条：`dyn` 靠一张有限的 vtable。返回 `Self`、方法再泛型，表造不出来。
-//! `Self: Sized` 是开关：这条方法只给具体类型，不要放进 `dyn`。
+//! 知道是谁 → `clone()`。只知道是 `dyn Trait` → `clone_box`。
 
 trait Work {
     fn run(&self);
@@ -97,6 +101,7 @@ fn main() {
     Ping.helper(1); // Self 是 Ping，大小已知，不走 vtable，可以调。
 
     // let _c: Box<dyn Clone> = Box::new(1);
-    // 编译失败：Clone::clone 返回 Self，造不出统一 vtable。
-    // 想克隆 trait 对象，像上面一样自己写 clone_box。
+    // 编译失败：dyn Clone 不合法。不是「i32 不能 clone」——1.clone() 完全可以。
+    // 是 Clone::clone 返回 Self：类型擦掉后，调用方不知道返回值多大。
+    // 具体类型用 .clone()；已经是 Box<dyn Work> 时，用上面的 clone_box。
 }
