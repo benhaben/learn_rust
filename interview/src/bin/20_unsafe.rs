@@ -11,6 +11,11 @@
 //! 3. 对外只暴露安全 API，让调用方无法打破不变量。
 //!
 //! 面试场景：FFI、自己写 Vec、无锁队列、SIMD。加分：Miri、文档、测试。
+//! 「自己写 Vec」= Vec 内部就是堆缓冲 + 未初始化容量 + 裸指针，必须 unsafe；
+//! 业务用现成 Vec 不必写。不操作内存就用不到。
+//!
+//! `safe_head` 和 `read_raw` 没有调用关系：前者是对照用的安全 API，
+//! 后者才是裸指针。能让人走切片，就别把指针交给业务。
 //!
 //! 裸指针别名 + 同时可变 = UB，不是“看运气”。
 
@@ -23,7 +28,7 @@ unsafe fn read_raw<T: Copy>(p: *const T) -> T {
     unsafe { std::ptr::read(p) }
 }
 
-/// 安全封装：切片已经保证指针有效。
+/// 对照：安全 API。不调用 read_raw，只演示「对外该长这样」。
 fn safe_head(xs: &[u8]) -> Option<u8> {
     xs.first().copied()
 }

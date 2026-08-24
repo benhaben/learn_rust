@@ -40,3 +40,4 @@ cargo run --bin 12_tokio_spawn
 - [static-hrtb.md](static-hrtb.md)：'static、HRTB、for<'a>
 - [cow.md](cow.md)：Cow、写时克隆、Borrowed vs Owned
 - [typestate.md](typestate.md)：编译期状态机、PhantomData
+- [unsafe.md](unsafe.md)：unsafe 边界、为何写 Vec 才需要
