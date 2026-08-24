@@ -35,3 +35,4 @@ cargo run --bin 12_tokio_spawn
 - [tokio-future-pin.md](tokio-future-pin.md)：tokio、Future、Pin、spawn
 - [mutex-guard-await.md](mutex-guard-await.md)：Mutex vs Guard、不能跨 await
 - [string-str-dst.md](string-str-dst.md)：String / &str、Deref、DST
+- [object-safety.md](object-safety.md)：dyn Trait、对象安全、Self: Sized
