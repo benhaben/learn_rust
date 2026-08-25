@@ -43,3 +43,4 @@ cargo run --bin 12_tokio_spawn
 - [typestate.md](typestate.md)：编译期状态机、PhantomData
 - [unsafe.md](unsafe.md)：unsafe 边界、为何写 Vec 才需要
 - [ffi-repr-c.md](ffi-repr-c.md)：repr(C)、CString 送字 / CStr 接字
+- [deref.md](deref.md)：Deref 是包装类型，不是基本类型

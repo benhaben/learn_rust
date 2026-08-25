@@ -2,7 +2,7 @@
 //!
 //! 运行：`cargo run --bin 23_deref`
 //!
-//! `Deref` 让智能指针用起来像里面的 T：
+//! 不是「i32 等基本类型都有 Deref」。是包装（String / Vec / Box）看起来像里面：
 //! - `&String` → `&str`
 //! - `&Vec<T>` → `&[T]`
 //! - `&Rc<T>` / `&Box<T>` → `&T`
