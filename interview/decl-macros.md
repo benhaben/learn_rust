@@ -43,3 +43,42 @@
 | `1 + 2` | 三个字符 | **一个** `$x:expr` |
 
 口条：**`$()` 是重复；`:expr` 抓表达式。像正则的是 `+` `?`；对的是代码结构。**
+
+## 过程宏 / 属性宏（和 `#define` 不是一类）
+
+`macro_rules!` 像加强版 C 宏：看见图案，换成代码。  
+**过程宏**是编译期跑的一段真正的 Rust 程序：吃 `TokenStream`，吐出新代码。
+
+```text
+过程宏
+├── derive     #[derive(Debug)]      读结构体，生成 impl
+├── 属性宏     #[tokio::main]        改掉整项（包一层 runtime）
+└── 函数式     sqlx::query!("...")   长得像函数调用
+```
+
+第 7 行那三个都是过程宏，贴法不同。「属性宏」是过程宏的一种，不是并列的第三大类。  
+`#[from]` 是 derive 宏读的属性，本身不是一种宏。
+
+| | 接近 |
+|---|---|
+| `macro_rules!` | `#define`，但按语法抠，有卫生性 |
+| 过程宏 | codegen / 编译器插件，不是 `#define` |
+
+## 「单独开一个 proc-macro crate」
+
+过程宏编出来是**给 rustc 用的插件**，必须先编好，业务才能用。同一个包既当普通库又当插件会成环，所以要另开一份 `Cargo.toml`：
+
+```toml
+[lib]
+proc-macro = true
+```
+
+```text
+my_app/      业务，依赖 my_macros
+my_macros/   只有过程宏
+```
+
+`thiserror`、`tokio` 的 `#[derive(Error)]` / `#[tokio::main]` 住在它们的宏包里。  
+手写 `myvec!`、用 `println!` 不必自己开包。自己写 derive / 属性宏才要。
+
+口条：**`macro_rules` 是图案替换，写在当前文件即可。过程宏是编译期小程序，必须单独一个 crate。**

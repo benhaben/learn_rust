@@ -3,8 +3,9 @@
 //! 运行：`cargo run --bin 22_macros`
 //!
 //! - **声明宏** `macro_rules!`：模式匹配 token，编译期展开。`vec!`、`println!`。
-//! - **过程宏**：另一段 Rust 程序吃 token stream。三种：
-//!   `#[derive(Debug)]`、属性宏 `#[tokio::main]`、函数式 `sqlx::query!`。
+//! - **过程宏**：编译期程序，必须单独 `proc-macro = true` 的 crate。三种贴法：
+//!   derive `#[derive(Debug)]`、属性宏 `#[tokio::main]`、函数式 `sqlx::query!`。
+//!   属性宏是过程宏的一种。`macro_rules!` 像加强版 #define，写在当前文件即可。
 //!
 //! 宏不是函数：没有类型、卫生性（不会意外捕获外部同名变量）。
 //! 能用泛型 / 函数就别上宏。调试：`cargo expand`。
