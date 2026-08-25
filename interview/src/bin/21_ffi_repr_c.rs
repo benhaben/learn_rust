@@ -37,7 +37,7 @@ fn send(px: f64, qty: u32) {
 }
 
 fn to_c_string(s: &str) -> CString {
-    // 中间有 \0 会失败。CString 保证以 NUL 结尾。
+    // 给 C 送字：拥有 + 末尾 NUL。中间有 \0 会失败。
     CString::new(s).expect("C 字符串不能包含内部 NUL")
 }
 

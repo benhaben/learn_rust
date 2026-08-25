@@ -28,3 +28,17 @@
 C++ 几乎不直接调：名字改编、`this`、异常、模板，每个编译器一份。Rust FFI 只承诺 **C**。有 C++ 库，先包 `extern "C"`，或用 `cxx`；量化里常见 C++ 引擎导出 C 接口，Rust 网关来调。
 
 口条：**跨语言对齐的是 C，不是 C++。默认布局和 `String` 都不是 C；`repr(C)` + `extern "C"` + `CString` 才对得上。**
+
+## `CString` / `CStr`
+
+`CString` 是给 C 函数用的、**自己拥有**的字：堆上拷一份，末尾补 `'\0'`，`as_ptr()` 才能当 `char*`。
+
+| | Rust `&str` / `String` | `CString` |
+|---|---|---|
+| 结尾 | 靠长度，没有必须的 NUL | 保证以 `'\0'` 结尾 |
+| 中间能不能有 `0` | 能 | 不能（C 会当成结束；`CString::new` 会失败） |
+| 传给 C | 对不上 | `c.as_ptr()` → `*const c_char` |
+
+`CStr` 是**借用**的 C 字符串：C 已经有一块 `char*`，用 `CStr::from_ptr` 看过来，不拥有。
+
+口条：**给 C 送字用 `CString`；从 C 接字用 `CStr`。**

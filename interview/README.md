@@ -41,4 +41,4 @@ cargo run --bin 12_tokio_spawn
 - [cow.md](cow.md)：Cow、写时克隆、Borrowed vs Owned
 - [typestate.md](typestate.md)：编译期状态机、PhantomData
 - [unsafe.md](unsafe.md)：unsafe 边界、为何写 Vec 才需要
-- [ffi-repr-c.md](ffi-repr-c.md)：repr(C)、CString、调 C 不调 C++
+- [ffi-repr-c.md](ffi-repr-c.md)：repr(C)、CString 送字 / CStr 接字
