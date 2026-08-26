@@ -48,3 +48,4 @@ cargo run --bin 12_tokio_spawn
 - [gats-async-trait.md](gats-async-trait.md)：GAT、's vs 'a、trait 里 async
 - [pin-self-ref.md](pin-self-ref.md)：Pin vs PhantomPinned、自引用 Future
 - [custom-future.md](custom-future.md)：自定义 Future、wake 叫 tokio、Ordering
+- [lock-grain.md](lock-grain.md)：分片锁、Vec 不必 Mutex

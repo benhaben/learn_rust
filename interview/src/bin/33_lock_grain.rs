@@ -9,6 +9,7 @@
 //! - 临界区只改内存结构，不要在锁里 serde / 写盘 / 回调 Python。
 //!
 //! 本例：按 symbol 哈希进分片锁。
+//! HashMap 会变所以每片一把 Mutex。Vec 造好后只当固定目录、只读下标，不必再锁。
 
 use std::collections::HashMap;
 use std::sync::Mutex;
