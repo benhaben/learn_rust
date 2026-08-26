@@ -14,7 +14,10 @@
 //!
 //! - 大多数类型自动 impl **Unpin**（“挪我也没事”）。对 Unpin，`Pin<&mut T>` 几乎没约束。
 //! - 含 `PhantomPinned` 的类型是 `!Unpin`。对它们 `get_mut` / `mem::replace` 是 UB。
+//!   PhantomPinned 是类型定义上的标签，不是另一种 Pin。
 //! - `Box::pin(t)` 把值放到堆上并钉住；地址在 Box 释放前不变。
+//!
+//! `dummy_cx` / RawWaker 是假 Context，好调用 poll；业务用 tokio，不必手写。
 
 use std::future::Future;
 use std::marker::PhantomPinned;

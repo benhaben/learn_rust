@@ -46,3 +46,4 @@ cargo run --bin 12_tokio_spawn
 - [deref.md](deref.md)：Deref 是包装类型，不是基本类型
 - [async-cancel.md](async-cancel.md)：tokio select! ≠ 内核 select
 - [gats-async-trait.md](gats-async-trait.md)：GAT、's vs 'a、trait 里 async
+- [pin-self-ref.md](pin-self-ref.md)：Pin vs PhantomPinned、自引用 Future
