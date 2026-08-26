@@ -9,6 +9,10 @@
 //! **async fn in trait**：现在稳定。以前要写成
 //! `fn get(&self) -> impl Future<Output = String> + '_`，或 `#[async_trait]` 装箱。
 //! `dyn Trait` 里若含 async，通常仍要装箱的 Future。
+//!
+//! `main` 里 Windows 循环和 Dummy.get 没有关系，两个考点拼在一个文件。
+//! `'s` 是源字符串；`Item<'_>` 的寿命是这次 `&mut self`（省略，等于 Item<'a>）。
+//! 不是 next 完就不能 next，是还拿着返回值时不能再 next。
 
 trait LendingIter {
     type Item<'a>

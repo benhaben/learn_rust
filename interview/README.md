@@ -45,3 +45,4 @@ cargo run --bin 12_tokio_spawn
 - [ffi-repr-c.md](ffi-repr-c.md)：repr(C)、CString 送字 / CStr 接字
 - [deref.md](deref.md)：Deref 是包装类型，不是基本类型
 - [async-cancel.md](async-cancel.md)：tokio select! ≠ 内核 select
+- [gats-async-trait.md](gats-async-trait.md)：GAT、's vs 'a、trait 里 async
