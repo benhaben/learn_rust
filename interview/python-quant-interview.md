@@ -15,7 +15,7 @@
 | pandas 链式赋值 | 用 `.loc[mask, col]=`，别链式切 | 为什么有时赋值没写进去 |
 | loc vs iloc | loc 按标签，iloc 按位置；默认 0,1,2 碰巧重合 | 删一行后 loc[2] 和 iloc[2] 谁还在 |
 | NumPy view / 对齐 | 切片常共享内存；Series 按 index 加 | 两个等长 Series 为何对不齐 |
-| 简单 vs 对数收益 | 组合用简单；时间可加用对数 | 净值为何 `(1+R).cumprod` |
+| 简单 vs 对数收益 | 组合用简单；时间可加用对数。`log`/`exp` 都是 e 为底；`exp(Σr)=Pn/P0` | 净值为何 `(1+R).cumprod`；`0.1906` 和 `1.21` 差在哪 |
 | 波动年化 | `σ_日 × √252`，写清交易日 | 1% 日波动年化多少、为何根号 |
 | Sharpe / MDD | 超额/波动；峰到谷；要扣费 | Sharpe 一样为何还看回撤换手 |
 | 相关 / 协方差 | 对**收益**相关；危机相关趋向 1 | 为何别对价格做相关 |
@@ -60,7 +60,7 @@
 
 ## 公式卡
 
-- \(R = P_1/P_0 - 1\)，\(r = \log(1+R)\)  
+- \(R = P_1/P_0 - 1\)，\(r = \ln(1+R)\)（`np.log` 是 e 为底；\(\mathrm{e}^{\sum r}=P_n/P_0\)）  
 - \(\sigma_{\mathrm{year}} \approx \sigma_{\mathrm{day}}\sqrt{252}\)  
 - Sharpe \(= \mathrm{E}[R-r_f]/\sigma \times \sqrt{252}\)  
 - MDD \(= \min(\mathrm{NAV}/\mathrm{cummax}(\mathrm{NAV})-1)\)  
