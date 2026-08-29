@@ -39,9 +39,32 @@ pandas 认出「行选择器 + 列名」，走一条会写回原数据的路径�
 df[mask] 走的是 DataFrame.__getitem__，先切片，再在切片上 ["side"]=，
 第二次赋值已经不知道「这是原表的一部分」。
 
+# loc 和 iloc 差在哪
+
+都是 [行, 列] 一次定位。差别只在「行/列」按什么认。
+
+    loc  = 标签（index / columns 上贴的名字）
+    iloc = 位置（第几行第几列，从 0 数，和 C 数组下标一样）
+
+默认没改过 index 时，行标签就是 0,1,2，碰巧等于位置，
+loc[0] 和 iloc[0] 看起来一样。删一行或换成日期之后就不一样了。
+
+    行还在：标签 0, 2（中间的 1 没了）
+    loc[2]     名字叫 2 的那一行（现在是表里第 2 条）
+    iloc[2]    第 3 行 → 越界
+    iloc[1]    现在的第 2 行，标签仍是 2
+
+切片开闭也不一样：
+    loc[0:2]   标签 0 到 2，两端都包含（按名字取范围）
+    iloc[0:2]  位置 0、1，不含 2（和 Python / NumPy 半开区间一样）
+
+列同理：loc[:, "side"] 按列名；iloc[:, 1] 按第 1 列。
+布尔条件（ret>0）是标签语义，用 loc，不要用 iloc。
+
 # 口条
 
 过滤并赋值用 .loc[条件, 列] = 值。不要先切片再点列再赋值。
+按名字用 loc，按第几行用 iloc。默认 0,1,2 只是碰巧两种写法重合。
 """
 
 import pandas as pd
@@ -57,3 +80,11 @@ print("loc 之后\n", df)
 
 # 不要：两步切。中间表有时是 view、有时是 copy，赋值可能改不到原 df
 # df[df["ret"] > 0]["side"] = 1
+
+# loc=标签，iloc=位置。删掉 index=1 之后，剩下标签 0、2
+df2 = pd.DataFrame({"ret": [0.01, -0.02, 0.03], "side": [0, 0, 0]})
+df2 = df2.drop(1)
+print("删行后 index", list(df2.index))
+print("loc[2] 标签 2\n", df2.loc[2])
+print("iloc[1] 现在的第 2 行\n", df2.iloc[1])
+# df2.iloc[2]  # IndexError：只剩 2 行，没有第 3 行
