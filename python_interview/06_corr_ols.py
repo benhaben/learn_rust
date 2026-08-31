@@ -69,12 +69,18 @@ print("价格相关（容易虚高）", np.corrcoef(px, px.shift(1).bfill())[0, 
 # pandas .corr() 就是一个数。市场是白噪声，今天收益 vs 昨天收益应靠近 0。
 print("收益相关", mkt.corr(mkt.shift(1)))
 
-# 设计矩阵：第一列全 1（截距 a），第二列昨市场（斜率 b）。
-# y ≈ X @ [a, b]。lstsq = 最小二乘，不必自己写 (X'X)^{-1} X'y。
+# lstsq = least squares（最小二乘）；linalg = linear algebra。
+# 找 β 让 ‖y − Xβ‖² 最小，不必自己写 (XᵀX)⁻¹ Xᵀy。
+# y ≈ a + b×昨市场 写成 y ≈ X @ [a, b]：
+#   第一列全 1 → 乘 a（截距）。没有这列，直线被逼过原点。
+#   第二列昨市场 → 乘 b。column_stack 两列并排。
+# to_numpy() 脱掉标签，lstsq 只吃纯数组。
 X = np.column_stack([np.ones(len(y)), mkt_lag.to_numpy()])
 beta, *_ = np.linalg.lstsq(X, y.to_numpy(), rcond=None)
 
-# beta[0] 截距应靠近 0；beta[1] 应靠近我们埋进去的 0.8。
+# beta 和 X 的列一一对应，不是带列名的表。
+# beta[0] 截距：造 y 时没加常数，噪声均值 0，应靠近 0（如 -6e-4）。
+# beta[1] 斜率：埋的是 0.8；样本短有噪声，会在附近晃（如 0.88），不必恰好相等。
 print("intercept, beta_lag", beta)
 # 同期 = 收盘后拆账；alpha = 开盘前就能用的预测。残差高 ≠ 能赚钱。
 print("口条：同期回归是风险分解，不是可交易 alpha。")
