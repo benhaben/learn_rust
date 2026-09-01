@@ -1,5 +1,7 @@
 # 深度学习（Jansen 后半本，不列入面试主线）
 
+两份脚本顶部同样有 **人话 / 目的 / 场景**。主线仍是 `../01_*.py` … `../22_*.py`。
+
 《Machine Learning for Algorithmic Trading》里 RNN / CNN / 自编码器 / RL 很厚。
 量化交易面试默认不深挖，除非 JD 写明深度学习或 NLP。
 
