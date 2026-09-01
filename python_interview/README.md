@@ -1,7 +1,7 @@
 # Python 量化面试示例
 
-和 `interview/` 里的 Rust bin 对应：每个主题一个可跑脚本。题面、口条见
-[../interview/python-quant-interview.md](../interview/python-quant-interview.md)
+和 `rust_interview/` 里的 Rust bin 对应：每个主题一个可跑脚本。题面、口条见
+[../rust_interview/python-quant-interview.md](../rust_interview/python-quant-interview.md)
 和画布 `python-quant-interview.canvas.tsx`。
 
 ```bash

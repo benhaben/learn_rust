@@ -3,7 +3,7 @@
 复习表里的代码都在这里，每个主题一个可执行文件，注释里讲清 move / Copy / 借用等概念。
 
 ```bash
-cd interview
+cd rust_interview
 
 # 编译全部
 cargo build --bins
