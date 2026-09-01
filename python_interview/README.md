@@ -18,5 +18,6 @@ python 04_returns.py
 | 编号 | 级别 | 文件 |
 |---|---|---|
 | 01–07 | 必考 | GIL、pandas、NumPy、收益、Sharpe、相关回归、泄漏 |
-| 08–12 | 进阶 | walk-forward、标签屏障、特征、成本、仓位 |
-| 13 | 压轴 | 信号到成交的滞后 |
+| 08–13 | 进阶/压轴 | walk-forward、特征标签、成本、仓位、IC、成交滞后 |
+| 14–21 | AFML / Jansen 必要 | 三重屏障、dollar bar、分数差分、DSR、meta、分层、协整、MDA |
+| `dl/` | 深度学习（单独目录） | 序列泄漏、为何不先上 LSTM。JD 未写 DL 可后看 |
