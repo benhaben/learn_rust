@@ -28,7 +28,7 @@
 
 | 主题 | 一句话 |
 |---|---|
-| Walk-forward / purged CV | purge=清洗重叠标签；embargo=测试后封禁一段 |
+| Walk-forward / purged CV | purge=清洗重叠标签；embargo=测试后封禁一段。事件+扣费见 `22_purge_net.py` |
 | 三重屏障 | 先碰到止盈 / 止损 / 超时；屏障随波动缩放 | 
 | dollar bar | 成交额凑满收一根，不是均匀时钟 |
 | 分数差分 | d∈(0,1) 要平稳又少丢记忆；d=1 就是普通差分 |
@@ -80,3 +80,5 @@
 ## 技术栈
 
 pandas/polars、numpy、statsmodels、sklearn/lightgbm、回测（自研或 Nautilus）、执行层与研究共用滞后规则。
+
+执行层 C++ / Linux / FPGA 见 [`../sys_interview/`](../sys_interview/README.md)。
