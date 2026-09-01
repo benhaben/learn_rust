@@ -51,3 +51,4 @@ cargo run --bin 12_tokio_spawn
 - [lock-grain.md](lock-grain.md)：分片锁、Vec 不必 Mutex
 - [python-quant-interview.md](python-quant-interview.md)：Python 量化 + ML 交易面试题（代码在 `python_interview/`）
 - [`../sys_interview/`](../sys_interview/README.md)：C++ / Linux / FPGA 量化工程（热路径、旁路、延迟账）
+- [`../greenbook_interview/`](../greenbook_interview/README.md)：绿皮书主题（概率 / 随机过程 / 期权），不抄书里原文

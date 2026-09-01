@@ -24,3 +24,5 @@ python 04_returns.py
 | `dl/` | 深度学习（单独目录） | 序列泄漏、为何不先上 LSTM。JD 未写 DL 可后看 |
 
 量化工程（C++ / Linux / FPGA）在 [`../sys_interview/`](../sys_interview/README.md)，和本目录互补：这里管研究正确性，那边管热路径延迟。
+
+经典量化面试数学（绿皮书主题，不抄原文）在 [`../greenbook_interview/`](../greenbook_interview/README.md)。
