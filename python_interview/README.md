@@ -4,6 +4,12 @@
 [../rust_interview/python-quant-interview.md](../rust_interview/python-quant-interview.md)
 和画布 `python-quant-interview.canvas.tsx`。
 
+每个 `.py` 顶部文档字符串都有三块：**人话**（这是什么）、**目的**、**场景**（什么时候用）。
+先读这三块再跑代码。
+
+**差分就是相减。** 一阶差分 = 今天减昨天（`P_t − P_{t−1}`，对数上就是收益）。
+分数差分（16）= 今天减去「很多天以前的加权和」，越远权重越小，为的是更平稳又少丢价格水平。
+
 ```bash
 cd python_interview
 python3 -m venv .venv
