@@ -2,6 +2,18 @@
 
 运行：python 01_gil_numpy.py
 
+# 人话
+GIL = CPython 的一把全局锁：同一时刻只允许一个线程跑 Python 字节码。
+多线程在纯计算上加不上核；NumPy 把整段数组丢进 C 一次算完，才快。
+
+# 目的
+分清「等 I/O」和「算因子」该用什么：别以为开了 ThreadPool 回测就会变快。
+
+# 场景
+行情回调、等网络 → threading（线程会放开 GIL）。
+百万根 K 线算收益/因子 → NumPy 向量化，或热路径用 Rust/C。
+多组互相独立的回测 → multiprocessing（多进程，各一把 GIL）。
+
 # 要说明什么
 
 CPython 有一把 GIL（Global Interpreter Lock）：同一时刻只有一个线程在跑
