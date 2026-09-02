@@ -36,14 +36,14 @@ python 04_returns.py
 | 09 | 进阶 | `09_features_label.py` | 特征用收益/波动，不要收盘价；标签=下一根收益 |
 | 10 | 必考 | `10_cost.py` | 昨仓 × 今收益；净收益还要扣换手成本 |
 | 11 | 进阶 | `11_position.py` | 信号÷波动再归一，再缩放到目标波动才是仓位 |
-| 12 | 进阶 | `12_ic.py` | 截面 IC = 当天因子 vs 下期收益的相关 |
+| 12 | 进阶 | `12_ic.py` | 截面 IC：当天因子 vs 下期收益；Spearman 抗幅度、不抗两头名次 |
 | 13 | 压轴 | `13_execution_lag.py` | 信号用 t，收益至少用下一根；shift(1) 不是信号失效 |
 | 14 | AFML | `14_triple_barrier.py` | 标签=先碰到止盈 / 止损 / 超时；路径只打 y 不进 X |
 | 15 | AFML | `15_dollar_bar.py` | 成交额凑满才收一根，时钟 bar 会扭曲信息密度 |
 | 16 | AFML | `16_frac_diff.py` | 分数差分：比一阶差分少丢价格记忆，又比原价更平稳 |
 | 17 | AFML | `17_deflated_sharpe.py` | 参数试得越多，最好的 Sharpe 越容易被运气抬高，要打折 |
 | 18 | AFML | `18_meta_label.py` | 元标签=主模型对不对；主定方向，次定下不下 |
-| 19 | AFML | `19_quantile_ls.py` | 分层多空：IC 会被两只极端票拉高，要看一组是否单调赚 |
+| 19 | AFML | `19_quantile_ls.py` | 分层多空：Pearson/Spearman/组均值各挡一种假；Q5−Q1 是多空价差 |
 | 20 | AFML | `20_cointegration.py` | 配对看价差是否平稳，价格相关高不等于能配对 |
 | 21 | AFML | `21_mda_importance.py` | 重要性在时间外置换（MDA）；别信训练里的 MDI |
 | 22 | 串起来 | `22_purge_net.py` | 把 14 的标签接到 08 的切分和 10 的扣费；看净不看 accuracy |
@@ -52,3 +52,5 @@ python 04_returns.py
 量化工程（C++ / Linux / FPGA）在 [`../sys_interview/`](../sys_interview/README.md)，和本目录互补：这里管研究正确性，那边管热路径延迟。
 
 经典量化面试数学（绿皮书主题，不抄原文）在 [`../greenbook_interview/`](../greenbook_interview/README.md)。
+
+高频时序（微观 / Hawkes / HJB / 热路径）在 [`../hft_interview/`](../hft_interview/README.md)。

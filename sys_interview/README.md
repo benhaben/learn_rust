@@ -3,6 +3,7 @@
 华钧这类岗位的主卷。研究侧口条仍看 [`../rust_interview/python-quant-interview.md`](../rust_interview/python-quant-interview.md)。
 
 总表：[`quant-sys-interview.md`](quant-sys-interview.md)  
+高频四块（热路径只是其中一块）见 [`../hft_interview/`](../hft_interview/README.md)。  
 FPGA 专页：[`fpga.md`](fpga.md)  
 画布（可筛选复习表）：[`quant-sys-interview.canvas.tsx`](/home/yin/.cursor/projects/home-yin-trading-learn-rust/canvases/quant-sys-interview.canvas.tsx)
 
