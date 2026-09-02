@@ -42,7 +42,7 @@ python 04_returns.py
 | 15 | AFML | `15_dollar_bar.py` | 成交额凑满才收一根，时钟 bar 会扭曲信息密度 |
 | 16 | AFML | `16_frac_diff.py` | 分数差分：比一阶差分少丢价格记忆，又比原价更平稳 |
 | 17 | AFML | `17_deflated_sharpe.py` | 参数试得越多，最好的 Sharpe 越容易被运气抬高，要打折 |
-| 18 | AFML | `18_meta_label.py` | 主模型定方向，次模型决定下不下 |
+| 18 | AFML | `18_meta_label.py` | 元标签=主模型对不对；主定方向，次定下不下 |
 | 19 | AFML | `19_quantile_ls.py` | 因子分层多空；只报 IC 不够，收益要大致单调 |
 | 20 | AFML | `20_cointegration.py` | 配对看价差是否平稳，价格相关高不等于能配对 |
 | 21 | AFML | `21_mda_importance.py` | 重要性在时间外置换（MDA）；别信训练里的 MDI |
