@@ -41,7 +41,7 @@ python 04_returns.py
 | 14 | AFML | `14_triple_barrier.py` | 标签=先碰到止盈 / 止损 / 超时；路径只打 y 不进 X |
 | 15 | AFML | `15_dollar_bar.py` | 成交额凑满才收一根，时钟 bar 会扭曲信息密度 |
 | 16 | AFML | `16_frac_diff.py` | 分数差分：比一阶差分少丢价格记忆，又比原价更平稳 |
-| 17 | AFML | `17_deflated_sharpe.py` | 试次越多最大 Sharpe 期望越高；扫出来的 2 要打折 |
+| 17 | AFML | `17_deflated_sharpe.py` | 参数试得越多，最好的 Sharpe 越容易被运气抬高，要打折 |
 | 18 | AFML | `18_meta_label.py` | 主模型定方向，次模型决定下不下 |
 | 19 | AFML | `19_quantile_ls.py` | 因子分层多空；只报 IC 不够，收益要大致单调 |
 | 20 | AFML | `20_cointegration.py` | 配对看价差是否平稳，价格相关高不等于能配对 |
