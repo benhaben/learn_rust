@@ -43,7 +43,7 @@ python 04_returns.py
 | 16 | AFML | `16_frac_diff.py` | 分数差分：比一阶差分少丢价格记忆，又比原价更平稳 |
 | 17 | AFML | `17_deflated_sharpe.py` | 参数试得越多，最好的 Sharpe 越容易被运气抬高，要打折 |
 | 18 | AFML | `18_meta_label.py` | 元标签=主模型对不对；主定方向，次定下不下 |
-| 19 | AFML | `19_quantile_ls.py` | 因子分层多空；只报 IC 不够，收益要大致单调 |
+| 19 | AFML | `19_quantile_ls.py` | 分层多空：IC 会被两只极端票拉高，要看一组是否单调赚 |
 | 20 | AFML | `20_cointegration.py` | 配对看价差是否平稳，价格相关高不等于能配对 |
 | 21 | AFML | `21_mda_importance.py` | 重要性在时间外置换（MDA）；别信训练里的 MDI |
 | 22 | 串起来 | `22_purge_net.py` | 把 14 的标签接到 08 的切分和 10 的扣费；看净不看 accuracy |
